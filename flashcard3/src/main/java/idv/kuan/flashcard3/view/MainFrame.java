@@ -1,32 +1,29 @@
 package idv.kuan.flashcard3.view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import javax.swing.JButton;
-import java.awt.Font;
-import javax.swing.BoxLayout;
-import java.awt.Component;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.FlowLayout;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.SystemColor;
 import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
+
+import idv.kuan.flashcard3.dao.Dao;
+import idv.kuan.flashcard3.dao.WordDao;
+import idv.kuan.flashcard3.model.Word;
+import javax.swing.BoxLayout;
 
 public class MainFrame extends JFrame {
 	private static final String PANEL_START = "panel_start";
@@ -34,6 +31,9 @@ public class MainFrame extends JFrame {
 	private static final String PANEL_ADD_WORD = "panel_add_word";
 
 	private JPanel contentPane;
+	private JTextArea txtr_term;
+	private JTextArea txtr_phoneticSymbol;
+	private JTextArea txtr_translation;
 
 	private static String navPoint = "";
 
@@ -108,6 +108,11 @@ public class MainFrame extends JFrame {
 		btn_addWord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				((CardLayout) contentPane.getLayout()).show(contentPane, PANEL_ADD_WORD);
+
+				txtr_term.setText("");
+				txtr_phoneticSymbol.setText("");
+				txtr_translation.setText("");
+
 				navPoint = PANEL_MAIN;
 			}
 		});
@@ -166,21 +171,33 @@ public class MainFrame extends JFrame {
 		btn_addWord_return.setBackground(SystemColor.menu);
 		panel_addWord_inner01.add(btn_addWord_return, BorderLayout.NORTH);
 
-		JTextArea txtr_term = new JTextArea();
+		JPanel panel_addWord_inner01w01 = new JPanel();
+		panel_addWord_inner01.add(panel_addWord_inner01w01, BorderLayout.WEST);
+		panel_addWord_inner01w01.setLayout(new BoxLayout(panel_addWord_inner01w01, BoxLayout.Y_AXIS));
+
+		txtr_term = new JTextArea();
 		txtr_term.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		txtr_term.setPreferredSize(new Dimension(200, 25));
 		txtr_term.setLineWrap(true);
-		txtr_term.setText("confirm\r\nKK[kənˋfɝm]DJ[kənˋfə:m]");
+		txtr_term.setText("confirm\r\n");
 		txtr_term.setFont(new Font("Monospaced", Font.PLAIN, 18));
-		panel_addWord_inner01.add(txtr_term, BorderLayout.WEST);
+		panel_addWord_inner01w01.add(txtr_term);
 
-		JTextArea txtr_translation = new JTextArea();
+		txtr_phoneticSymbol = new JTextArea();
+		txtr_phoneticSymbol.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtr_phoneticSymbol.setPreferredSize(new Dimension(200, 25));
+		txtr_phoneticSymbol.setLineWrap(true);
+		txtr_phoneticSymbol.setText("KK[kənˋfɝm]DJ[kənˋfə:m]");
+		txtr_phoneticSymbol.setFont(new Font("Monospaced", Font.PLAIN, 18));
+		panel_addWord_inner01w01.add(txtr_phoneticSymbol);
+
+		txtr_translation = new JTextArea();
 		txtr_translation.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		txtr_translation.setLineWrap(true);
 		txtr_translation.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		txtr_translation.setText(
 				"1.證實；確定[+（that）][+wh-]\r\nHis letter confirmed everything. 他的信證實了一切。\r\n2.堅定；加強\r\nThe latest developments confirmed me in my belief. 最新的發展使我堅信我的信仰。\r\n3.批准，確認\r\nThe queen confirmed the treaty. 女王批准了此項條約。\r\n4.【宗】給……施堅信禮");
-		panel_addWord_inner01.add(txtr_translation, BorderLayout.CENTER);
+		panel_addWord_inner01.add(txtr_translation);
 
 		JPanel panel_addWord_otherOpt = new JPanel();
 		panel_addWord_otherOpt.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -188,6 +205,18 @@ public class MainFrame extends JFrame {
 		panel_addWord_inner01.add(panel_addWord_otherOpt, BorderLayout.EAST);
 
 		JButton btn_addWord_confirm = new JButton("新增單字");
+		btn_addWord_confirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Dao<Word> dao = new WordDao();
+				Word word = new Word();
+				word.setTerm(txtr_term.getText());
+				word.setPhoneticSymbol(txtr_phoneticSymbol.getText());
+				word.setTranslation(txtr_translation.getText());
+				dao.add(word);
+
+				((CardLayout) contentPane.getLayout()).show(contentPane, navPoint);
+			}
+		});
 		btn_addWord_confirm.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btn_addWord_confirm.setFocusable(false);
 		btn_addWord_confirm.setFont(new Font("Monospaced", Font.PLAIN, 18));

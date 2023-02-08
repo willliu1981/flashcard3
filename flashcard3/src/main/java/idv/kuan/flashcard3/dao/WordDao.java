@@ -1,6 +1,7 @@
 package idv.kuan.flashcard3.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,19 @@ public class WordDao implements Dao<Word> {
 
 	@Override
 	public void add(Word t) {
+		Connection conn = DBConn.getConnection();
 
+		String sql = "insert into word (term,phonetic_symbol,translation)values(?,?,?)";
+		try {
+			PreparedStatement prepareStatement = conn.prepareStatement(sql);
+			prepareStatement.setString(1, t.getTerm());
+			prepareStatement.setString(2, t.getPhoneticSymbol());
+			prepareStatement.setString(3, t.getTranslation());
+
+			prepareStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -27,6 +40,7 @@ public class WordDao implements Dao<Word> {
 			Word word = new Word();
 			word.setId(Integer.valueOf(id.toString()));
 			word.setTerm(rs.getString("term"));
+			word.setPhoneticSymbol(rs.getString("phonetic_symbol"));
 			word.setTranslation(rs.getString("translation"));
 			return word;
 

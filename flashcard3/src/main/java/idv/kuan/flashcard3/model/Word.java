@@ -3,6 +3,7 @@ package idv.kuan.flashcard3.model;
 public class Word {
 	private Integer id;
 	private String term;
+	private String phoneticSymbol;
 	private String translation;
 
 	public Integer getId() {
@@ -21,6 +22,14 @@ public class Word {
 		this.term = term;
 	}
 
+	public String getPhoneticSymbol() {
+		return phoneticSymbol;
+	}
+
+	public void setPhoneticSymbol(String phoneticSymbol) {
+		this.phoneticSymbol = phoneticSymbol;
+	}
+
 	public String getTranslation() {
 		return translation;
 	}
@@ -31,8 +40,7 @@ public class Word {
 
 	@Override
 	public String toString() {
-		return "Word [id=" + id + ", term=" + term + ", translation="
-				+ translation + "]";
+		return "Word [id=" + id + ", term=" + term + ", translation=" + translation + "]";
 	}
 
 }
