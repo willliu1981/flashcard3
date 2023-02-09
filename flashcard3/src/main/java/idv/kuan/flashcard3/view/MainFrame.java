@@ -12,6 +12,7 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,7 +24,8 @@ import javax.swing.border.SoftBevelBorder;
 import idv.kuan.flashcard3.dao.Dao;
 import idv.kuan.flashcard3.dao.WordDao;
 import idv.kuan.flashcard3.model.Word;
-import javax.swing.BoxLayout;
+import idv.kuan.flashcard3.view.fc3component.FCComponent;
+import idv.kuan.flashcard3.view.navigate.CardPanelNavigate;
 
 public class MainFrame extends JFrame {
 	private static final String PANEL_START = "panel_start";
@@ -61,6 +63,7 @@ public class MainFrame extends JFrame {
 		setBounds(100, 100, 787, 581);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		FCComponent.addComponent(contentPane, "contentPane");
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
@@ -81,7 +84,8 @@ public class MainFrame extends JFrame {
 		btn_start.setBackground(SystemColor.control);
 		btn_start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				((CardLayout) contentPane.getLayout()).show(contentPane, PANEL_MAIN);
+				((CardLayout) contentPane.getLayout()).show(contentPane,
+						PANEL_MAIN);
 			}
 		});
 		btn_start.setFont(new Font("新細明體", Font.PLAIN, 18));
@@ -100,14 +104,17 @@ public class MainFrame extends JFrame {
 		GridBagLayout gbl_panel_main_inner01 = new GridBagLayout();
 		gbl_panel_main_inner01.columnWidths = new int[] { 69, 0 };
 		gbl_panel_main_inner01.rowHeights = new int[] { 31, 0, 0, 0 };
-		gbl_panel_main_inner01.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
-		gbl_panel_main_inner01.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel_main_inner01.columnWeights = new double[] { 1.0,
+				Double.MIN_VALUE };
+		gbl_panel_main_inner01.rowWeights = new double[] { 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
 		panel_main_inner01.setLayout(gbl_panel_main_inner01);
 
 		JButton btn_addWord = new JButton("新增單字");
 		btn_addWord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				((CardLayout) contentPane.getLayout()).show(contentPane, PANEL_ADD_WORD);
+				((CardLayout) contentPane.getLayout()).show(contentPane,
+						PANEL_ADD_WORD);
 
 				txtr_term.setText("");
 				txtr_phoneticSymbol.setText("");
@@ -162,10 +169,12 @@ public class MainFrame extends JFrame {
 		JButton btn_addWord_return = new JButton("返回");
 		btn_addWord_return.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				((CardLayout) contentPane.getLayout()).show(contentPane, navPoint);
+				new CardPanelNavigate().jump(navPoint);
+
 			}
 		});
-		btn_addWord_return.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btn_addWord_return.setBorder(new SoftBevelBorder(BevelBorder.RAISED,
+				null, null, null, null));
 		btn_addWord_return.setFocusable(false);
 		btn_addWord_return.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		btn_addWord_return.setBackground(SystemColor.menu);
@@ -173,10 +182,12 @@ public class MainFrame extends JFrame {
 
 		JPanel panel_addWord_inner01w01 = new JPanel();
 		panel_addWord_inner01.add(panel_addWord_inner01w01, BorderLayout.WEST);
-		panel_addWord_inner01w01.setLayout(new BoxLayout(panel_addWord_inner01w01, BoxLayout.Y_AXIS));
+		panel_addWord_inner01w01.setLayout(
+				new BoxLayout(panel_addWord_inner01w01, BoxLayout.Y_AXIS));
 
 		txtr_term = new JTextArea();
-		txtr_term.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtr_term.setBorder(
+				new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		txtr_term.setPreferredSize(new Dimension(200, 25));
 		txtr_term.setLineWrap(true);
 		txtr_term.setText("confirm\r\n");
@@ -184,7 +195,8 @@ public class MainFrame extends JFrame {
 		panel_addWord_inner01w01.add(txtr_term);
 
 		txtr_phoneticSymbol = new JTextArea();
-		txtr_phoneticSymbol.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtr_phoneticSymbol.setBorder(
+				new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		txtr_phoneticSymbol.setPreferredSize(new Dimension(200, 25));
 		txtr_phoneticSymbol.setLineWrap(true);
 		txtr_phoneticSymbol.setText("KK[kənˋfɝm]DJ[kənˋfə:m]");
@@ -192,7 +204,8 @@ public class MainFrame extends JFrame {
 		panel_addWord_inner01w01.add(txtr_phoneticSymbol);
 
 		txtr_translation = new JTextArea();
-		txtr_translation.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtr_translation.setBorder(
+				new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		txtr_translation.setLineWrap(true);
 		txtr_translation.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		txtr_translation.setText(
@@ -200,7 +213,8 @@ public class MainFrame extends JFrame {
 		panel_addWord_inner01.add(txtr_translation);
 
 		JPanel panel_addWord_otherOpt = new JPanel();
-		panel_addWord_otherOpt.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_addWord_otherOpt.setBorder(
+				new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_addWord_otherOpt.setPreferredSize(new Dimension(100, 10));
 		panel_addWord_inner01.add(panel_addWord_otherOpt, BorderLayout.EAST);
 
@@ -214,10 +228,12 @@ public class MainFrame extends JFrame {
 				word.setTranslation(txtr_translation.getText());
 				dao.add(word);
 
-				((CardLayout) contentPane.getLayout()).show(contentPane, navPoint);
+				new CardPanelNavigate().jump(navPoint);
+
 			}
 		});
-		btn_addWord_confirm.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btn_addWord_confirm.setBorder(new SoftBevelBorder(BevelBorder.RAISED,
+				null, null, null, null));
 		btn_addWord_confirm.setFocusable(false);
 		btn_addWord_confirm.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		btn_addWord_confirm.setBackground(SystemColor.menu);

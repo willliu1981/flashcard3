@@ -1,10 +1,14 @@
 package idv.kuan.flashcard3.model;
 
+import java.sql.Timestamp;
+
 public class Word {
 	private Integer id;
 	private String term;
 	private String phoneticSymbol;
 	private String translation;
+	private Timestamp createdAt;
+	private Timestamp updatedAt;
 
 	public Integer getId() {
 		return id;
@@ -38,9 +42,29 @@ public class Word {
 		this.translation = translation;
 	}
 
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
 	@Override
 	public String toString() {
-		return "Word [id=" + id + ", term=" + term + ", translation=" + translation + "]";
+		return "Word [id=" + id + ", term=" + term + ", phoneticSymbol="
+				+ phoneticSymbol + ", translation=" + translation
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

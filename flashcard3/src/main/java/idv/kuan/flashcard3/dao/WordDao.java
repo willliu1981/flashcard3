@@ -30,7 +30,7 @@ public class WordDao implements Dao<Word> {
 
 	@Override
 	public Word get(Object id) {
-		String sql = "select * from word where id=?";
+		String sql = "select id,term,phonetic_symbol,translation,datetime(created_at, 'localtime') from word where id=?";
 		Connection conn = DBConn.getConnection();
 
 		try {
