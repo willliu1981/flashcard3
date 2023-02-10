@@ -4,8 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 public class FCComponent {
+	public static final String CONTENTPANE="contentPane";
+	public static final String WORD_STOCK_SEARCH="word_stock_search";
+	public static final String WORD_STOCK_CONTENT="word_stock_content";
+	
 	private static Map<String, JComponent> components = new HashMap<>();
 
 	public static <T extends JComponent> void addComponent(T comp,
@@ -19,5 +24,10 @@ public class FCComponent {
 		JComponent jComponent = components.get(name);
 
 		return (T) jComponent;
+	}
+
+	public static JPanel findJPanel(String name) {
+
+		return findComponent(name, JPanel.class);
 	}
 }

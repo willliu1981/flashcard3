@@ -26,11 +26,10 @@ import idv.kuan.flashcard3.dao.WordDao;
 import idv.kuan.flashcard3.model.Word;
 import idv.kuan.flashcard3.view.fc3component.FCComponent;
 import idv.kuan.flashcard3.view.navigate.CardPanelNavigate;
+import javax.swing.JTextField;
+import java.awt.Component;
 
 public class MainFrame extends JFrame {
-	private static final String PANEL_START = "panel_start";
-	private static final String PANEL_MAIN = "panel_main";
-	private static final String PANEL_ADD_WORD = "panel_add_word";
 
 	private JPanel contentPane;
 	private JTextArea txtr_term;
@@ -63,13 +62,13 @@ public class MainFrame extends JFrame {
 		setBounds(100, 100, 787, 581);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		FCComponent.addComponent(contentPane, "contentPane");
+		FCComponent.addComponent(contentPane, FCComponent.CONTENTPANE);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
 
 		JPanel panel_start = new JPanel();
-		contentPane.add(panel_start, PANEL_START);
+		contentPane.add(panel_start, CardPanelNavigate.PANEL_START);
 		panel_start.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_start_inner01 = new JPanel();
@@ -85,7 +84,7 @@ public class MainFrame extends JFrame {
 		btn_start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				((CardLayout) contentPane.getLayout()).show(contentPane,
-						PANEL_MAIN);
+						CardPanelNavigate.PANEL_MAIN);
 			}
 		});
 		btn_start.setFont(new Font("新細明體", Font.PLAIN, 18));
@@ -96,7 +95,7 @@ public class MainFrame extends JFrame {
 		panel_start_inner01.add(btn_start, gbc_btn_start);
 
 		JPanel main_panel = new JPanel();
-		contentPane.add(main_panel, PANEL_MAIN);
+		contentPane.add(main_panel, CardPanelNavigate.PANEL_MAIN);
 		main_panel.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_main_inner01 = new JPanel();
@@ -113,14 +112,13 @@ public class MainFrame extends JFrame {
 		JButton btn_addWord = new JButton("新增單字");
 		btn_addWord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				((CardLayout) contentPane.getLayout()).show(contentPane,
-						PANEL_ADD_WORD);
-
 				txtr_term.setText("");
 				txtr_phoneticSymbol.setText("");
 				txtr_translation.setText("");
 
-				navPoint = PANEL_MAIN;
+				navPoint = CardPanelNavigate.PANEL_MAIN;
+
+				new CardPanelNavigate().jump(CardPanelNavigate.PANEL_ADD_WORD);
 			}
 		});
 		btn_addWord.setFont(new Font("新細明體", Font.PLAIN, 18));
@@ -134,6 +132,12 @@ public class MainFrame extends JFrame {
 		panel_main_inner01.add(btn_addWord, gbc_btn_addWord);
 
 		JButton btn_searchWord = new JButton("查詢字庫");
+		btn_searchWord.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CardPanelNavigate()
+						.jump(CardPanelNavigate.PANEL_SEARCH_WORD);
+			}
+		});
 		btn_searchWord.setFont(new Font("新細明體", Font.PLAIN, 18));
 		btn_searchWord.setFocusable(false);
 		btn_searchWord.setBackground(SystemColor.menu);
@@ -159,7 +163,7 @@ public class MainFrame extends JFrame {
 		main_panel.add(panel_main_inner02, BorderLayout.NORTH);
 
 		JPanel panel_addWord = new JPanel();
-		contentPane.add(panel_addWord, PANEL_ADD_WORD);
+		contentPane.add(panel_addWord, CardPanelNavigate.PANEL_ADD_WORD);
 		panel_addWord.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_addWord_inner01 = new JPanel();
@@ -238,6 +242,108 @@ public class MainFrame extends JFrame {
 		btn_addWord_confirm.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		btn_addWord_confirm.setBackground(SystemColor.menu);
 		panel_addWord_inner01.add(btn_addWord_confirm, BorderLayout.SOUTH);
+
+		JPanel panel_word_stock = new JPanel();
+		contentPane.add(panel_word_stock, CardPanelNavigate.PANEL_SEARCH_WORD);
+		panel_word_stock.setLayout(new BorderLayout(0, 0));
+
+		JPanel panel_word_stock_inner01 = new JPanel();
+		panel_word_stock.add(panel_word_stock_inner01, BorderLayout.CENTER);
+		panel_word_stock_inner01.setLayout(new BorderLayout(0, 0));
+
+		JButton btn_word_stock_return = new JButton("返回");
+		btn_word_stock_return.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CardPanelNavigate().jump(CardPanelNavigate.PANEL_MAIN);
+			}
+		});
+		btn_word_stock_return.setFocusable(false);
+		btn_word_stock_return.setBackground(SystemColor.control);
+		btn_word_stock_return.setFont(new Font("新細明體", Font.PLAIN, 18));
+		panel_word_stock_inner01.add(btn_word_stock_return, BorderLayout.SOUTH);
+
+		JPanel panel_word_stock_inner01n01 = new JPanel();
+		panel_word_stock_inner01.add(panel_word_stock_inner01n01,
+				BorderLayout.NORTH);
+		panel_word_stock_inner01n01.setLayout(new BorderLayout(0, 0));
+
+		JTextField txtf_word_stock_search = new JTextField();
+		txtf_word_stock_search.setFont(new Font("新細明體", Font.PLAIN, 22));
+		panel_word_stock_inner01n01.add(txtf_word_stock_search,
+				BorderLayout.CENTER);
+		txtf_word_stock_search.setColumns(10);
+		FCComponent.addComponent(txtf_word_stock_search,
+				FCComponent.WORD_STOCK_SEARCH);
+
+		JPanel panel_word_stock_inner01n01w01 = new JPanel();
+		panel_word_stock_inner01n01w01.setPreferredSize(new Dimension(250, 10));
+		panel_word_stock_inner01n01.add(panel_word_stock_inner01n01w01,
+				BorderLayout.WEST);
+
+		JPanel panel_word_stock_inner01n01e01 = new JPanel();
+		panel_word_stock_inner01n01e01.setPreferredSize(new Dimension(250, 50));
+		panel_word_stock_inner01n01.add(panel_word_stock_inner01n01e01,
+				BorderLayout.EAST);
+		GridBagLayout gbl_panel_word_stock_inner01n01e01 = new GridBagLayout();
+		gbl_panel_word_stock_inner01n01e01.columnWidths = new int[] { 40, 40,
+				40 };
+		gbl_panel_word_stock_inner01n01e01.rowHeights = new int[] { 40, 40,
+				35 };
+		gbl_panel_word_stock_inner01n01e01.columnWeights = new double[] { 0.0,
+				0.0, 0.0 };
+		gbl_panel_word_stock_inner01n01e01.rowWeights = new double[] { 0.0,
+				0.0 };
+		panel_word_stock_inner01n01e01
+				.setLayout(gbl_panel_word_stock_inner01n01e01);
+
+		JButton btn_word_stock_search = new JButton("查詢");
+		btn_word_stock_search.setFocusable(false);
+		btn_word_stock_search.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				WordDao dao = new WordDao();
+				Word result = dao.getByTerm(
+						FCComponent.findComponent(FCComponent.WORD_STOCK_SEARCH,
+								JTextField.class).getText());
+				JTextArea content = FCComponent.findComponent(
+						FCComponent.WORD_STOCK_CONTENT, JTextArea.class);
+				StringBuilder sb = new StringBuilder();
+				sb.append(result.getTerm()).append("\r\n").append("\r\n")
+						.append(result.getPhoneticSymbol()).append("\r\n")
+						.append("\r\n").append(result.getTranslation());
+				content.setText(sb.toString());
+			}
+		});
+		btn_word_stock_search.setBackground(SystemColor.control);
+		GridBagConstraints gbc_btn_word_stock_search = new GridBagConstraints();
+		gbc_btn_word_stock_search.insets = new Insets(0, 0, 5, 5);
+		gbc_btn_word_stock_search.gridx = 1;
+		gbc_btn_word_stock_search.gridy = 1;
+		panel_word_stock_inner01n01e01.add(btn_word_stock_search,
+				gbc_btn_word_stock_search);
+		btn_word_stock_search.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btn_word_stock_search.setFont(new Font("新細明體", Font.PLAIN, 18));
+
+		JPanel panel_word_stock_inner01n01n01 = new JPanel();
+		panel_word_stock_inner01n01.add(panel_word_stock_inner01n01n01,
+				BorderLayout.NORTH);
+
+		JPanel panel_word_stock_inner01n01s01 = new JPanel();
+		panel_word_stock_inner01n01.add(panel_word_stock_inner01n01s01,
+				BorderLayout.SOUTH);
+
+		JPanel panel_word_stock_inner01n01c01 = new JPanel();
+		panel_word_stock_inner01.add(panel_word_stock_inner01n01c01,
+				BorderLayout.CENTER);
+		panel_word_stock_inner01n01c01.setLayout(new BorderLayout(0, 0));
+
+		JTextArea txtr_word_stock_content = new JTextArea();
+		txtr_word_stock_content.setLineWrap(true);
+		txtr_word_stock_content.setFont(new Font("Monospaced", Font.PLAIN, 18));
+		txtr_word_stock_content.setEditable(false);
+		panel_word_stock_inner01n01c01.add(txtr_word_stock_content,
+				BorderLayout.CENTER);
+		FCComponent.addComponent(txtr_word_stock_content,
+				FCComponent.WORD_STOCK_CONTENT);
 
 	}
 

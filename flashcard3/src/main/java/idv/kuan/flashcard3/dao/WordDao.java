@@ -51,6 +51,28 @@ public class WordDao implements Dao<Word> {
 		return null;
 	}
 
+	public Word getByTerm(String term) {
+		String sql = "select id,term,phonetic_symbol,translation,datetime(created_at, 'localtime') from word where term=?";
+		Connection conn = DBConn.getConnection();
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, term);
+			ResultSet rs = stmt.executeQuery();
+			Word word = new Word();
+			word.setId(rs.getInt("id"));
+			word.setTerm(rs.getString("term"));
+			word.setPhoneticSymbol(rs.getString("phonetic_symbol"));
+			word.setTranslation(rs.getString("translation"));
+			return word;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
 	@Override
 	public void update(Word t, Object o) {
 
