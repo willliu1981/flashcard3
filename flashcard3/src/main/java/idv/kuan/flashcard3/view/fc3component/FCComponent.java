@@ -8,6 +8,11 @@ import javax.swing.JPanel;
 
 public class FCComponent {
 	public static final String CONTENTPANE="contentPane";
+	
+	public static final String TXTR_TERM="txtr_term";
+	public static final String TXTR_PHONETICSYMBOL="txtr_phoneticSymbol";
+	public static final String TXTR_TRANSLATION="txtr_translation";
+	
 	public static final String WORD_STOCK_SEARCH="word_stock_search";
 	public static final String WORD_STOCK_CONTENT="word_stock_content";
 	

@@ -13,12 +13,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import idv.kuan.flashcard3.view.fc3component.CardPanelComponentFactory;
 import idv.kuan.flashcard3.view.fc3component.FCPanel;
 import idv.kuan.flashcard3.view.navigate.CardPanelNavigate;
 
 public class MainPanel extends FCPanel {
 
-	public MainPanel() {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public MainPanel(ActionListener addWordListener) {
 		this.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_main_inner01 = new JPanel();
@@ -33,17 +39,7 @@ public class MainPanel extends FCPanel {
 		panel_main_inner01.setLayout(gbl_panel_main_inner01);
 
 		JButton btn_addWord = new JButton("新增單字");
-		btn_addWord.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//txtr_term.setText("");
-				//txtr_phoneticSymbol.setText("");
-				//txtr_translation.setText("");
-
-				//navPoint = CardPanelNavigate.PANEL_MAIN;
-
-				new CardPanelNavigate().jump(CardPanelNavigate.PANEL_ADD_WORD);
-			}
-		});
+		btn_addWord.addActionListener(addWordListener);
 		btn_addWord.setFont(new Font("新細明體", Font.PLAIN, 18));
 		btn_addWord.setFocusable(false);
 		btn_addWord.setBackground(SystemColor.menu);
@@ -57,8 +53,8 @@ public class MainPanel extends FCPanel {
 		JButton btn_searchWord = new JButton("查詢字庫");
 		btn_searchWord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CardPanelNavigate()
-						.jump(CardPanelNavigate.PANEL_SEARCH_WORD);
+				new CardPanelNavigate(CardPanelComponentFactory.PANEL_WORD_STOCK_SEARCH).jump(
+						);
 			}
 		});
 		btn_searchWord.setFont(new Font("新細明體", Font.PLAIN, 18));

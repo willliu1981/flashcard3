@@ -6,7 +6,7 @@ public class CardPanelComponentFactory {
 	public static final String PANEL_START = "panel_start";
 	public static final String PANEL_MAIN = "panel_main";
 	public static final String PANEL_ADD_WORD = "panel_add_word";
-	public static final String PANEL_SEARCH_WORD = "panel_search_word";
+	public static final String PANEL_WORD_STOCK_SEARCH = "panel_word_stock_search";
 
 	private JPanel compPanel;
 	private String name;

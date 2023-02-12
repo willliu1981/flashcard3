@@ -18,6 +18,11 @@ import idv.kuan.flashcard3.view.fc3component.FCPanel;
 
 public class StartPanel extends FCPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public StartPanel() {
 		this.setLayout(new BorderLayout(0, 0));
 
