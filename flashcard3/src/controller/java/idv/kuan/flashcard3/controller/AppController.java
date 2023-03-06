@@ -1,4 +1,4 @@
-package idv.kuan.flashcard3.control;
+package idv.kuan.flashcard3.controller;
 
 public class AppController {
 	private static String navPoint = "";

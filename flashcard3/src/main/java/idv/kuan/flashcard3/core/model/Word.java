@@ -1,4 +1,4 @@
-package idv.kuan.flashcard3.model;
+package idv.kuan.flashcard3.core.model;
 
 import java.sql.Timestamp;
 

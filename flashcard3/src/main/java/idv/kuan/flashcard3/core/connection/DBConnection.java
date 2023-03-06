@@ -1,4 +1,4 @@
-package idv.kuan.flashcard3.connection;
+package idv.kuan.flashcard3.core.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,4 +17,12 @@ public class DBConn {
 		}
 		return null;
 	}
+	
+	public static DBConn getAndroidDBConnection() {
+		
+		
+		return null;
+	}
 }
+
+

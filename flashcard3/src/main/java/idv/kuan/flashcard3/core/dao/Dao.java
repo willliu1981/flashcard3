@@ -1,4 +1,4 @@
-package idv.kuan.flashcard3.dao;
+package idv.kuan.flashcard3.core.dao;
 
 public interface Dao<T> {
 

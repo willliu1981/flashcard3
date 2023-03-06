@@ -1,4 +1,4 @@
-package idv.kuan.flashcard3;
+package idv.kuan.flashcard3.view;
 
 import java.awt.EventQueue;
 

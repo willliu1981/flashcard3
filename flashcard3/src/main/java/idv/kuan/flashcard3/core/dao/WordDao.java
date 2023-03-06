@@ -1,4 +1,4 @@
-package idv.kuan.flashcard3.dao;
+package idv.kuan.flashcard3.core.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import idv.kuan.flashcard3.connection.DBConn;
-import idv.kuan.flashcard3.model.Word;
+import idv.kuan.flashcard3.core.connection.DBConn;
+import idv.kuan.flashcard3.core.model.Word;
 
 public class WordDao implements Dao<Word> {
 

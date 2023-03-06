@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import idv.kuan.flashcard3.dao.WordDao;
-import idv.kuan.flashcard3.model.Word;
+import idv.kuan.flashcard3.core.dao.WordDao;
+import idv.kuan.flashcard3.core.model.Word;
 
 /**
  * Hello world!

@@ -14,10 +14,10 @@ import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
-import idv.kuan.flashcard3.control.AppController;
-import idv.kuan.flashcard3.dao.Dao;
-import idv.kuan.flashcard3.dao.WordDao;
-import idv.kuan.flashcard3.model.Word;
+import idv.kuan.flashcard3.controller.AppController;
+import idv.kuan.flashcard3.core.dao.Dao;
+import idv.kuan.flashcard3.core.dao.WordDao;
+import idv.kuan.flashcard3.core.model.Word;
 import idv.kuan.flashcard3.view.fc3component.FCComponent;
 import idv.kuan.flashcard3.view.fc3component.FCPanel;
 import idv.kuan.flashcard3.view.navigate.CardPanelNavigate;

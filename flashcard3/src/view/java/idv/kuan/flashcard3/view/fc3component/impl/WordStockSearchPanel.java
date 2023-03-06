@@ -16,8 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import idv.kuan.flashcard3.dao.WordDao;
-import idv.kuan.flashcard3.model.Word;
+import idv.kuan.flashcard3.core.dao.WordDao;
+import idv.kuan.flashcard3.core.model.Word;
 import idv.kuan.flashcard3.view.fc3component.CardPanelComponentFactory;
 import idv.kuan.flashcard3.view.fc3component.FCComponent;
 import idv.kuan.flashcard3.view.fc3component.FCPanel;

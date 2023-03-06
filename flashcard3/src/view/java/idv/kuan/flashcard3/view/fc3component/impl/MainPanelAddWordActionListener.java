@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextArea;
 
-import idv.kuan.flashcard3.control.AppController;
+import idv.kuan.flashcard3.controller.AppController;
 import idv.kuan.flashcard3.view.fc3component.CardPanelComponentFactory;
 import idv.kuan.flashcard3.view.fc3component.FCComponent;
 import idv.kuan.flashcard3.view.navigate.CardPanelNavigate;
